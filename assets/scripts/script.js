@@ -1,33 +1,5 @@
-/*
-0.  Declare variables : uLength, uCharTypes, mPassword, mSpecChars, mNumChars, mLowChars, mCapChars.
-
-1.  Prompt the user for password length.
-        1a) Check if the user put in a valid length.
-        1b) If NOT, re-prompt the user.
-        1c) If yes, then continue.
-
-2.  Confirm if the user wants special characters.
-        2a) Confirm if the user wants numeric characters.
-        2b) Confirm if the user wants lowercase characters.
-        2c) Confirm if the user wants uppercase characters.
-        2d) CHECK if the user selected at least one type of character.
-        2e) If NOT, then default to uppercase characters, and alert the user that we have done this.
-
-3.  Create a function which passes in two properties: the length, pLength, of the password, and an array, pCharTypes, containing 4 booleans for each character type.
-        3a) Check the type of parameters coming in.  Send error if parameters are the wrong type, else, continue.
-        3b) Within the function, declare several variables : iCharTypes_n, iChar_CUR, iRandom.
-        3c) Define how many character types we can choose from by reading from the parameter 
-        3c) Of our available character types, chose a random character type.
-        3d) Run a seperate function to chose a random character from that pool of characters.
-        3e) Add that new character to our password.
-        3f) Repeat until our password meets the length requirement.
-3.5.Create a function called "GetRandomCharacter" which passes in one of our character type arrays (special, numeric, lower, upper)
-        3.5a) Check if the character type is valid.  If not, send an error.
-        3.5b) Grab a random number within the length of our array.
-        3.5c) Using the random number, return the corresponding element within our parameter character type array.
-4.  Display the randomly generated password to the user.
-
-*/
+//----------PASSWORD GENERATOR----------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 //----------VARIABLES----------//
 //-----------------------------//
@@ -108,6 +80,7 @@ function getRandomType() {
         }
 }
 
+//Returns a random character from our passing random type.
 function GetRandomCharacter(pType) {
 
         if (mUseTypes[pType]) {
@@ -228,11 +201,12 @@ function CopyToClipboard()
 //--------------------------------//
 
 
-
+//Generate ASCII characters
 mNumChars = generateASCII(mNumChars);
 mLowChars = generateASCII(mLowChars);
 mCapChars = generateASCII(mCapChars);
 
+//Create an array of all our types of characters.
 mAllTypes = [mSpecChars, mNumChars, mLowChars, mCapChars];
 
-//Set the variable 'uLength' to the user's input.
+//User input will trigger 'BeginGeneratePassword()' and 'CopyToClipboard()'
