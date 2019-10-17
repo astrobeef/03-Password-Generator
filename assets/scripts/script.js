@@ -49,16 +49,12 @@ var mUseTypes = [];                            //ALl character sets which will b
 //-----------------------------//
 
 //Adds all active character sets to the 'mUseTypes' variable.
-function AddActiveCharTypes()
-{
-        for(var i = 0; i < uCharTypes.length; i++)
-        {
-                if(uCharTypes[i] === true)
-                {
+function AddActiveCharTypes() {
+        for (var i = 0; i < uCharTypes.length; i++) {
+                if (uCharTypes[i] === true) {
                         mUseTypes[i] = mAllTypes[i];
                 }
-                else
-                {
+                else {
                         mUseTypes[i] = "";
                 }
         }
@@ -102,7 +98,7 @@ function areAllTypesFalse() {
 //Returns a random type and avoids grabbing inactive types by recursion.
 function getRandomType() {
         let iRandom_TYPE = Math.round(Math.random() * uCharTypes.length);
-        
+
         if (uCharTypes[iRandom_TYPE]) {
                 console.log(iRandom_TYPE);
                 return iRandom_TYPE;
@@ -113,17 +109,15 @@ function getRandomType() {
 }
 
 function GetRandomCharacter(pType) {
-        
-        if(mUseTypes[pType])
-        {
+
+        if (mUseTypes[pType]) {
                 let i = Math.round(Math.random() * mUseTypes[pType].length);
-                
+
                 console.log(mUseTypes[pType][i]);
                 return mUseTypes[pType][i];
-                
+
         }
-        else
-        {
+        else {
                 console.error("Not working");
                 console.log("pType" + pType);
         }
@@ -147,7 +141,7 @@ function GeneratePassword(pLength) {
                         mPassword.push(iRandom_CHAR);
 
                 }
-                
+
                 mPassword = mPassword.join("");
         }
         else {
@@ -155,8 +149,85 @@ function GeneratePassword(pLength) {
         }
 }
 
+function ResetVariables()
+{
+        uLength = 0;
+        uCharTypes = [];
+        mPassword = [];
+        mUseTypes = [];
+}
+
+function BeginGeneratePassword() {
+
+        ResetVariables();
+
+        uLength = prompt("How long would you like your password to be? (Between 8 and 128 characters)");
+
+        if(!uLength)
+        {
+                return;
+        }
+
+        //While the variable 'uLength' is NOT a number, AND less than 8, AND less than 128, ...
+        while (isNaN(uLength) || uLength < 8 || uLength > 128) {
+                uLength = prompt("That wasn't a valid answer... try again.");
+
+                if(!uLength)
+                {
+                        return;
+                }
+        }
+
+        //Convert length into a number.
+        uLength = parseInt(uLength);
+
+        //Will the user use special characters
+        uCharTypes[0] = confirm("Would you like to use Special Characters ($, #, ^, ...)");
+
+        //Will the user use number characters
+        uCharTypes[1] = confirm("Would you like to use Numeric Characters (1, 2, 3, ...)");
+
+        //Will the user use lowercase characters
+        uCharTypes[2] = confirm("Would you like to use Lowercase Characters (a, b, c, ...)");
+
+        //Will the user use uppercase characters
+        uCharTypes[3] = confirm("Would you like to use Uppercase Characters (A, B, C, ...)");
+
+        //Set uppercase to true, if the user set all options to false.
+        if (areAllTypesFalse()) {
+                alert("No character type was set, so we are using only Uppercase characters.");
+
+                uCharTypes[3] = true;
+        }
+
+        //Adds all 'true' options within the character sets.
+        AddActiveCharTypes();
+
+        GeneratePassword(uLength, uCharTypes);
+
+        document.getElementById("passwordText").innerText = mPassword;
+
+}
+
+function CopyToClipboard()
+{
+        
+  /* Get the inner text */
+  var copyText = document.getElementById("passwordText").innerText;
+
+  /* Copy to clipboard using the navigator */
+  navigator.clipboard.writeText(copyText).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+      })
+
+  /* Alert the copied text */
+  alert("Copied the text: " + copyText);
+}
+
 //----------MAIN PROCESS----------//
 //--------------------------------//
+
+
 
 mNumChars = generateASCII(mNumChars);
 mLowChars = generateASCII(mLowChars);
@@ -165,38 +236,3 @@ mCapChars = generateASCII(mCapChars);
 mAllTypes = [mSpecChars, mNumChars, mLowChars, mCapChars];
 
 //Set the variable 'uLength' to the user's input.
-uLength = prompt("How long would you like your password to be? (Between 8 and 128 characters)");
-
-//While the variable 'uLength' is NOT a number, AND less than 8, AND less than 128, ...
-while (isNaN(uLength) || uLength < 8 || uLength > 128) {
-        uLength = prompt("That wasn't a valid answer... try again.");
-}
-
-//Convert length into a number.
-uLength = parseInt(uLength);
-
-//Will the user use special characters
-uCharTypes[0] = confirm("Would you like to use Special Characters ($, #, ^, ...)");
-
-//Will the user use number characters
-uCharTypes[1] = confirm("Would you like to use Numeric Characters (1, 2, 3, ...)");
-
-//Will the user use lowercase characters
-uCharTypes[2] = confirm("Would you like to use Lowercase Characters (a, b, c, ...)");
-
-//Will the user use uppercase characters
-uCharTypes[3] = confirm("Would you like to use Uppercase Characters (A, B, C, ...)");
-
-//Set uppercase to true, if the user set all options to false.
-if (areAllTypesFalse()) {
-        alert("No character type was set, so we are using only Uppercase characters.");
-
-        uCharTypes[3] = true;
-}
-
-//Adds all 'true' options within the character sets.
-AddActiveCharTypes();
-
-GeneratePassword(uLength, uCharTypes);
-
-alert(mPassword);

@@ -1,0 +1,20 @@
+body
+{
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.border-dashed
+{
+    border-style: dashed;
+}
+
+.bg-light-grey
+{
+    background-color: #DCDCDC;
+}
+
+.bg-lighter-grey
+{
+    background-color: #F5F5F5;
+}

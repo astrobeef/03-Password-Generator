@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Password Generator</title>
 
+    <style>
+            @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+            </style>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
@@ -14,41 +17,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
+    <link rel = "stylesheet" href = "assets/css/style.css";>
 </head>
 
-<body>
+<body class = "bg-light-grey">
     
     <div class="container">
         
         <div class="row">
             
-            <h1 class = "mx-auto mt-4">
+            <h2 class = "mx-auto mt-4 pb-5">
                 
                 Password Generator
                 
-            </h1>
+            </h2>
             
         </div>
 
-        <div class="row col-10 bg-primary m-auto">
+        <div class="row col-9 col-lg-7 bg-white m-auto shadow-lg rounded">
 
-            <h1 class="row mr-auto mt-3 col-12">
+            <h3 class="row mr-auto ml-5 mt-3 mb-1 col-10 text-sm-center text-md-center">
 
                 Generate a Password
 
-            </h1>
+            </h3>
 
-            <div class="row divider"></div>
+            <div class="row col-10 mx-auto dropdown-divider mb-3 border-secondary"></div>
 
-            <div class="row mx-auto col-12">
+            <div class="row mx-auto col-10 bg-white pb-5 pt-4 mb-3 border border-rounded border-dashed">
 
-                <div class="row mx-auto bg-secondary">
+                <div class="row mx-auto mb-5 py-1 px-3 col-12">
 
-                    Your Secure Password
+                    <p class = "col-8 align-center text-wrap text-break text-center mx-auto px-auto my-3" id = "passwordText">Your Secure Password<p>
 
                 </div>
                 
             </div>
+
+            <div class="row mx-auto">
+                
+                <div class="col-12 pb-5 pt-3 text-sm-center text-md-center">
+
+                    <button type="button" onclick="BeginGeneratePassword()" id = "generatePassword" class="btn btn-warning mx-lg-5 px-lg-3">Generate Password</button>
+                    <button type="button" onclick="CopyToClipboard()" id = "copy" class="btn btn-primary mx-lg-5 px-lg-3">Copy to clipboard</button>
+
+                </div>
+
+                <div class="col">
+
+
+                </div>
+
+            </div>
+
+            
 
         </div>
         
